@@ -1,0 +1,40 @@
+### find all orders
+GET http://localhost:5000/api/v1/orders
+Content-Type: application/json
+
+### find order by id
+GET http://localhost:5000/api/v1/orders/c7c342c7-8356-42ae-bb67-4a5df7bae516
+Content-Type: application/json
+
+<> 2022-05-30T020739.200.json
+
+
+### Create a order
+POST http://localhost:5000/api/v1/order
+Content-Type: application/json
+
+{
+  "order": {
+    "cost": 0,
+    "activated": true,
+    "address": "calle 74 58b 32",
+    "email": "string@loki.com"
+  }
+}
+
+### Update a order
+PUT http://localhost:5000/api/v1/orders/c7c342c7-8356-42ae-bb67-4a5df7bae516
+Content-Type: application/json
+
+{
+  "order": {
+    "cost": 0,
+    "activated": true,
+    "address": "calle 74 58b 32",
+    "email": "stringfloat.com"
+  }
+}
+
+### Delete a order
+DELETE http://localhost:5000/api/v1/orders/c7c342c7-8356-42ae-bb67-4a5df7bae516
+Content-Type: application/json

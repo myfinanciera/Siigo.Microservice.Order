@@ -1,0 +1,32 @@
+FROM golang:1.18.3 as builder
+
+
+ENV GIT_TERMINAL_PROMPT=1
+ENV LIBRDKAFKA_VERSION=1.5.3
+
+ARG PAT
+ENV GOPRIVATE=dev.azure.com
+RUN apt clean
+RUN apt autoclean
+RUN apt autoremove
+RUN git config --global url."https://anythinggoeshere:$PAT@dev.azure.com".insteadOf "https://dev.azure.com"
+
+RUN git clone https://github.com/edenhill/librdkafka.git && \
+    cd librdkafka && \
+    git checkout tags/v${LIBRDKAFKA_VERSION} && \
+    ./configure --prefix=/usr && \
+    make && \
+    make install &&\
+    ldconfig && \
+    cd .. && \
+    rm -rf librdkafka
+
+RUN apt update && apt install protobuf-compiler -y && \
+    go install github.com/cosmtrek/air@latest && \
+    go install github.com/favadi/protoc-go-inject-tag@latest
+
+ENV BUF_PREFIX_DIR="/usr/local"
+ENV BUF_VERSION="1.5.0"
+RUN curl -sSL \
+        "https://github.com/bufbuild/buf/releases/download/v${BUF_VERSION}/buf-$(uname -s)-$(uname -m).tar.gz" | \
+        tar -xvzf - -C "${BUF_PREFIX_DIR}" --strip-components 1

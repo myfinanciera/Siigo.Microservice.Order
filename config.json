@@ -1,0 +1,11 @@
+{
+  "MostPopularToken": "YOUR-MOST-POPULAR-API-TOKEN",
+  "SemanticToken": "YOUR-SEMANTIC-API-TOKEN",
+  "Server": {
+    "ServerType": "rpc",
+    "HTTPPort": 8080,
+    "RPCPort": 9220,
+    "HTTPAccessLog": "./access.log",
+    "RPCAccessLog": "./rpc-access.log"
+  }
+}

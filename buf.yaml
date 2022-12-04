@@ -1,0 +1,21 @@
+version: v1beta1
+name: buf.build/siigo/order
+
+build:
+  roots:
+    - src/api/proto
+
+lint:
+  rpc_allow_google_protobuf_empty_requests: true
+  use:
+    - DEFAULT
+    - UNARY_RPC
+
+deps:
+  - buf.build/googleapis/googleapis
+  - buf.build/grpc-ecosystem/grpc-gateway
+
+breaking:
+  use:
+    - FILE
+  ignore_unstable_packages: true

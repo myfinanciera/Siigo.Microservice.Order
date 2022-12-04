@@ -1,0 +1,52 @@
+domain:
+  name: Order
+  topic: Order.Topic
+
+eventStore:
+  url: "http://admin:changeit@es-db.eventstore-system:2113"
+
+mongo:
+  connectionString: "mongodb+srv://siigo-dev:S6bmGkLnaGpGgBJQ@siigo-dev.u7fhi.azure.mongodb.net/dbGoArchetype?retryWrites=true&w=majority"
+  database: "dbGoArchetype"
+  collection: "OrderExample"
+
+redis:
+  addr: "localhost:6379"
+  password: ""
+  db: 0
+  timeOut: 0s
+
+businessLogger:
+  lokiUrl: "http://businessloki.loki:3100"
+  enabled: true
+  defaultLabels:
+    Application: ms-archetype-go
+    Language: golang
+keyVault:
+  azureClientId: "1144216e-beae-4633-88e5-dc9f567238ff"
+  azureClientSecret: "_SK9_hB9R03n.Hqx0dNU~QZa2B~21iOVqa"
+  azureTenantId: "3a7479db-d9ff-4e0b-9d0a-380a5e714f6f"
+  vaultName: "kvQAAppSettingsCommons"
+
+  kafka:
+    enabled: true
+    clusterCertificate: "CaClusterCertificate"
+    consumerCertificate: "DefaultKafkaConsumerRoleCertificate"
+    producerCertificate: "DefaultKafkaProducerRoleCertificate"
+
+kafka:
+  "bootstrap.servers": "qa.kafka.siigo.com:9094"
+  "group.id": "greeterSvcLocal"
+  "auto.offset.reset": "earliest"
+  "security.protocol": "ssl"
+  "ssl.ca.location": "cluster.pem"
+  "ssl.certificate.location": "consumer.pem"
+  "ssl.key.location": "consumer.pem"
+
+spring:
+  application:
+    name: ms-archetype-go-ddd
+  cloud:
+    config:
+      url: http://ms-springcloud.siigo-configuration:5000
+      env: qa

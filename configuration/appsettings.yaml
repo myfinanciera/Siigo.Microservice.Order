@@ -1,0 +1,27 @@
+domain:
+  name: Order
+  topic: Order.Topic
+
+appName: ms-order
+
+redis:
+  addr: "localhost:6379"
+  password: ""
+  db: 0
+  timeOut: 0s
+
+httpServer:
+  port: 5000
+
+grpc:
+  host: "0.0.0.0"
+  port: 6000
+  serverMinTime: 6m
+  serverTime: 2h
+  serverTimeout: 20s
+  connTime: 10s
+  connTimeout: 20s
+
+log:
+  level: "debug"  #panic, fatal, error, warn, warning, info, debug, trace
+  reportCaller: true

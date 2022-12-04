@@ -1,0 +1,86 @@
+// Copyright 2020 Siigo. All rights reserved.
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file.
+syntax = "proto3";
+
+package order.v1;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "siigo.com/contract/src/api/proto/order/v1;orderv1";
+message Order {
+  string id = 1;
+  string idcustomer = 2;
+  int32 number = 3;
+  google.protobuf.Timestamp occurred = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+  bool state = 5;
+  repeated string product = 6;
+  string email = 7;
+}
+message AddOrderRequest {
+  Order order = 1;
+}
+message AddOrderResponse {
+  Order order = 1;
+}
+message FindOrdersResponse {
+  repeated Order orders = 1;
+}
+message UpdateOrderRequest {
+  Order order = 1;
+}
+message UpdateOrderResponse {
+  Order order = 1;
+}
+message DeleteOrderRequest {
+  string id = 1;
+}
+message DeleteOrderResponse {
+  Order order = 1;
+}
+message GetOrderRequest {
+  string id = 1;
+}
+message GetOrderResponse {
+  Order order = 1;
+}
+
+service OrderService {
+  rpc FindOrders(google.protobuf.Empty) returns (FindOrdersResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/orders"
+    };
+  }
+  rpc AddOrder(AddOrderRequest) returns (AddOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/order",
+      body: "*"
+    };
+  }
+  rpc UpdateOrder(UpdateOrderRequest) returns (UpdateOrderResponse) {
+    option (google.api.http) = {
+      put: "/api/v1/order/{order.id}"
+      body: "*"
+    };
+  }
+  rpc DeleteOrder(DeleteOrderRequest) returns (DeleteOrderResponse) {
+    option (google.api.http) = {
+      delete: "/api/v1/order/{id}"
+    };
+  }
+
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/order/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Find a order"
+      description: "Find a order by uuid."
+    };
+  }
+}

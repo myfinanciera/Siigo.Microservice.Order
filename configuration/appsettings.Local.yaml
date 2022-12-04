@@ -1,0 +1,42 @@
+domain:
+  name: Order
+  topic: Order.Topic
+
+kafka:
+  "bootstrap.servers": "localhost:9093"
+  "group.id": "greeterSvcLocal"
+  "auto.offset.reset": "earliest"
+
+keyVault:
+  azureClientId: "1144216e-beae-4633-88e5-dc9f567238ff"
+  azureClientSecret: "_SK9_hB9R03n.Hqx0dNU~QZa2B~21iOVqa"
+  azureTenantId: "3a7479db-d9ff-4e0b-9d0a-380a5e714f6f"
+  vaultName: "kvQAAppSettingsCommons"
+
+  kafka:
+    enabled: true
+    clusterCertificate: "CaClusterCertificate"
+    consumerCertificate: "DefaultKafkaConsumerRoleCertificate"
+    producerCertificate: "DefaultKafkaProducerRoleCertificate"
+
+eventStore:
+  url: "http://admin:changeit@localhost:2113"
+
+mongo:
+  connectionString: "mongodb+srv://mart800749:v5hmcgr4ZED5F849@clusterwilmar.4eycben.mongodb.net/test"
+  database: "dbOrder"
+  collection: "order"
+
+redis:
+  addr: "localhost:6379"
+  password: ""
+  db: 0
+  timeOut: 0s
+
+businessLogger:
+  lokiUrl: "http://businessloki.loki:3100"
+  enabled: true
+  defaultLabels:
+    Application: ms-order
+    Language: golang
+
